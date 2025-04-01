@@ -52,7 +52,7 @@ res.status(200).json(saveMenu)
 app.get('/getd/:workType',async(req,res)=>{
   try{
 const workType = req.params.workType;
-if(workType == 'waiter'){
+if(workType == 'waiter'||'manager'){
 const sendRes =await Person.find({designation:workType});
 console.log('response fetched')
 res.status(200).json(sendRes);
