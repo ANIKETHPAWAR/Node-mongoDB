@@ -53,7 +53,12 @@ else{
 
 router.put('/:id',async(req,res)=>{
   try{
-const  newId = req.params.id
+const  newId = req.params.id;
+const updateContent = req.body
+const reponse = await Person.findByIdAndUpdate(newId,updateContent,{
+  new:true,
+  runValidators:true
+})
   }catch{
 
   }
