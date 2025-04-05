@@ -51,4 +51,12 @@ else{
   }
 });
 
+router.put('/:id',async(req,res)=>{
+  try{
+const  newId = req.params.id
+  }catch{
+
+  }
+})
+
 module.exports = router;
