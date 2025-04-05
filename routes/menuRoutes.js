@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const menu = require('./../models/menu')
-router.post('/menu',async(req,res)=>{
+router.post('/',async(req,res)=>{
     try{
   const menuData = req.body;
   const newMenu = menu(menuData);
@@ -15,7 +15,7 @@ router.post('/menu',async(req,res)=>{
       
     }
   })
-  router.get('/menu',async(req,res)=>{
+  router.get('/',async(req,res)=>{
     try{
         const menuItems =await menu.find();
         console.log('data found')
@@ -24,6 +24,26 @@ router.post('/menu',async(req,res)=>{
     catch(err){
         console.log(err);
         res.status(500).json(menuItems)
+    }
+  })
+  
+  router.get('/:spicy',async(req,res)=>{
+    try{
+        const reqType = req.params.healthy
+    
+        if(reqType == 'hot'||'heavy'){
+          let resData = await menu.find({spicy:reqType})
+          console.log('found healthy food!!')
+          res.status(200).json(resData)
+        }
+        else{
+          console.log("invalid input 404")
+          res.status(400).json(resData)
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json(resData)
     }
   })
   

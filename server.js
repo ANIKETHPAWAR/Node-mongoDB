@@ -15,7 +15,7 @@ app.use(bodyParser.json())
 
 
 app.use('/persons',personRoutes);
-app.use('/',menuRoutes);
+app.use('/menu',menuRoutes);
 
  app.listen(3000,()=>{
    console.log('listening on p -3000')

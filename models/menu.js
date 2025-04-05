@@ -8,6 +8,12 @@ price: {
 type: Number,
 required: true,
 },
+spicy:{
+    type:String,
+    enum:['hot','heavy','sour'],
+required: true
+
+}
 
 });
 const MenuItem = mongoose.model('MenuItem', menuItemSchema);
