@@ -58,8 +58,11 @@ const updateContent = req.body
 const reponse = await Person.findByIdAndUpdate(newId,updateContent,{
   new:true,
   runValidators:true
+
  
 })
+res.status(200).json(reponse);
+console.log('data updated')
 if(!reponse){
   return res.status(404).json({error:'not found'})
 }
