@@ -58,8 +58,14 @@ const updateContent = req.body
 const reponse = await Person.findByIdAndUpdate(newId,updateContent,{
   new:true,
   runValidators:true
+ 
 })
-  }catch{
+if(!reponse){
+  return res.status(404).json({error:'not found'})
+}
+  }catch(err){
+    console.log(err);
+    res.status(500).json({error:'internal error'})
 
   }
 })
