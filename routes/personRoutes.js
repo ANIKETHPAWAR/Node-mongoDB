@@ -73,4 +73,18 @@ if(!reponse){
   }
 })
 
+router.delete("/:id",async(req,res)=>{
+  try{
+const new1Id = req.params.id;
+const deletedPerson = await Person.findByIdAndDelete(new1Id)
+console.log('data deleted')
+res.status(200).json(deletedPerson);
+if(!deletedPerson){
+  return res.status(404).json({error:'not found'})
+}
+  }
+catch(err){
+  console.log(err);
+  res.status(500).json({error:'internal error'})
+}})
 module.exports = router;
