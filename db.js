@@ -1,6 +1,7 @@
  const mongoose = require('mongoose');
 
  const mongoURL = 'mongodb://127.0.0.1:27017/myDatabase';
+ require('dotenv').config()
 const mongoDb_URL = process.env.mongo_Url || mongoURL;
 
  mongoose.connect(mongoDb_URL,{
@@ -9,10 +10,10 @@ const mongoDb_URL = process.env.mongo_Url || mongoURL;
  })
 //bridge connection b/w node.js & database server
  const db = mongoose.connection
-
+                      
  //Event listeners
  db.on('connected',()=>{
-    console.log('connected');
+    console.log('connected');  
  });
  db.on('disconnected',()=>{
     console.log('disconnected');
