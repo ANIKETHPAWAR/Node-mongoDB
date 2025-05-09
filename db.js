@@ -4,10 +4,9 @@
  require('dotenv').config()
 const mongoDb_URL =  process.env.mongoDB_URL ||   mongoURL;
 
- mongoose.connect(process.env.mongoDB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(process.env.mongoDB_URL)
+.then(() => console.log("Connected to MongoDB"))
+.catch((err) => console.error("MongoDB connection error:", err));
 
 //bridge connection b/w node.js & database server
  const db = mongoose.connection
