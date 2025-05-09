@@ -29,7 +29,7 @@ router.post('/',async(req,res)=>{
   
   router.get('/:spicy',async(req,res)=>{
     try{
-        const reqType = req.params.healthy
+        const reqType = req.params.spicy
     
         if(reqType == 'hot'||'heavy'){
           let resData = await menu.find({spicy:reqType})

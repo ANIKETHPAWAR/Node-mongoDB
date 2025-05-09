@@ -1,13 +1,14 @@
  const mongoose = require('mongoose');
 
- const mongoURL = 'mongodb://127.0.0.1:27017/myDatabase';
+ const mongoURL = 'mongodb://localhost:27017/myDatabase';
  require('dotenv').config()
-const mongoDb_URL = process.env.mongo_Url || mongoURL;
+const mongoDb_URL =  process.env.mongoDb_URL ||   mongoURL;
 
- mongoose.connect(mongoDb_URL,{
-   useNewUrlParser: true,
-   useUnifiedTopology:true
- })
+ mongoose.connect(mongoDb_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 //bridge connection b/w node.js & database server
  const db = mongoose.connection
                       
