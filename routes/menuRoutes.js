@@ -23,7 +23,7 @@ router.post('/',async(req,res)=>{
     }
     catch(err){
         console.log(err);
-        res.status(500).json(menuItems)
+        res.status(500).json({error:'internal error'})
     }
   })
   
