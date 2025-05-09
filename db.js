@@ -2,11 +2,16 @@
 
 //  const mongoURL = 'mongodb://localhost:27017/myDatabase';
  require('dotenv').config()
-const mongoDb_URL =  process.env.mongoDB_URL ;
+const mongoDb_URL =  process.env.MONGODB_URI ;
 
 mongoose.connect(mongoDb_URL)
 .then(() => console.log("Connected to MongoDB"))
 .catch((err) => console.error("MongoDB connection error:", err));
+if (!mongoDb_URL) {
+   console.error("❌ MONGODB_URI is undefined. Check your .env or Render environment variables.");
+   process.exit(1);
+ }
+ 
 
 //bridge connection b/w node.js & database server
  const db = mongoose.connection
