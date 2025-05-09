@@ -2,7 +2,7 @@
 
  const mongoURL = 'mongodb://localhost:27017/myDatabase';
  require('dotenv').config()
-const mongoDb_URL =  process.env.mongoDb_URL ||   mongoURL;
+const mongoDb_URL =  process.env.mongoDB_URL ||   mongoURL;
 
  mongoose.connect(mongoDb_URL, {
   useNewUrlParser: true,
