@@ -7,7 +7,17 @@ require('dotenv').config()
 const PORT = process.env.PORT || 3000
  const bodyParser = require('body-parser')
 app.use(bodyParser.json())
- app.get('/',(req,res)=>{
+
+//middleware func
+const logger = (req,res,next)=>{
+  console.log(`logger: ${req.method} request made to : ${req.url} on ${new Date()}`);
+  next();
+}
+app.use(logger);
+
+
+
+ app.get('/',logger,(req,res)=>{
     res.send("hello")
  })
 

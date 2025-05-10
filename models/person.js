@@ -21,7 +21,16 @@ const personSchema = new mongoose.Schema({
     salary:{
         type:Number,
         
-    }
+    },
+    username:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    password:{
+        type:String,
+        required:true
+    },
 })
 
 let person = mongoose.model('person',personSchema);
