@@ -28,7 +28,7 @@ const localAuth = passport.authenticate('local',{session:false})
  app.get('/',logger,localAuth,(req,res)=>{
     res.send("hello")
  })
-app.use('/persons',localAuth,personRoutes);
+app.use('/persons',personRoutes);
 app.use('/menu',menuRoutes);
 
  app.listen(PORT,()=>{

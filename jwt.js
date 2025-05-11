@@ -24,5 +24,20 @@ catch(err){
 
 
 }
+/// function to generate JWT
+const generateToken = (userData)=>{
+    // generate new jwt token using user data
+    return jwt.sign(userData,process.env.JWT_SECRET);
+}
 
-module.exports = jwtAuthMiddleware
+
+
+
+
+
+
+
+
+
+
+module.exports = {jwtAuthMiddleware,generateToken}

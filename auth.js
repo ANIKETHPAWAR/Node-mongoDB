@@ -7,6 +7,7 @@
   try{
 
     const person = await Person.findOne({username:username});
+    console.log(person)
    
     if(!person){
       return done(null,false,{message:'user not found'})

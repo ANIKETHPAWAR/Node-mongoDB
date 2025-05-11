@@ -1,23 +1,71 @@
 const express = require('express');
 const router = express.Router()
 const Person = require('./../models/person')
+const {jwtAuthMiddleware,generateToken} = require('./../jwt')
 
-router.post('/',async (req,res)=>{
+/// signup token
+router.post('/signup',async (req,res)=>{
     try{
     const data = req.body
     const newPerson =new Person(data);
     
     const savedPerson=await newPerson.save()
     console.log('data saved');
-    res.status(200).json(savedPerson)
+
+    // generating new token
+const payLoad ={
+  id: savedPerson.id,
+  username: savedPerson.username
+}
+const token = generateToken(payLoad);
+console.log('your token is :' ,token);
+
+
+
+
+
+
+    res.status(200).json({savedPerson,token : token})
     }catch(err){
     console.log(err);
     res.status(500).json({error: 'internal error'})
     }
     
      })
+/// login routes token 
 
-     router.get('/',async(req,res)=>{
+router.post('/login',async (req,res)=>{
+
+
+try{
+const {username,password} = req.body;
+
+const user = await Person.findOne({username:username});
+
+if(!user || !(await user.comparePassword(password))){
+return response.status(401).json({error: 'user didnt match'})
+}
+
+const payLoad = {
+  id :user.id,
+  username : user.username
+
+}
+
+const token = generateToken(payLoad);
+res.json({token})
+
+
+}
+catch(err){
+console.error(err);
+res.status(500).json({error: 'interal server error'})
+}
+
+})
+//// protected routes 
+
+     router.get('/',jwtAuthMiddleware,async(req,res)=>{
         try{
       const data = await Person.find();
       console.log('data fetch');
@@ -29,6 +77,20 @@ router.post('/',async (req,res)=>{
           
         }
        })
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
 
 router.get('/:workType',async(req,res)=>{
   try{
