@@ -78,18 +78,23 @@ res.status(500).json({error: 'interal server error'})
         }
        })
 
-      
+    router.get('/profile',jwtAuthMiddleware,async(req,res)=>{
+      try{
+const userData = req.user;
+      console.log('user Data ', userData);
 
+      const userId = userData.id
+const user = await Person.findById(userId)
+console.log('user found')
+res.status(500).json(user )
+      }
+      catch(err){
+console.error(err);
+          res.status(500).json({error:'internal error'})
+          
+      }
 
-
-
-
-
-
-
-
-
-
+    })  
 
 
 router.get('/:workType',async(req,res)=>{

@@ -6,7 +6,7 @@
 require('dotenv').config()
 const PORT = process.env.PORT || 3000
  const bodyParser = require('body-parser')
- 
+ const {jwtAuthMiddleware,generateToken} = require('./jwt')
  const passport = require('./auth'); 
 
 require('./auth')
@@ -28,8 +28,8 @@ const localAuth = passport.authenticate('local',{session:false})
  app.get('/',logger,localAuth,(req,res)=>{
     res.send("hello")
  })
-app.use('/persons',personRoutes);
-app.use('/menu',menuRoutes);
+app.use('/persons',jwtAuthMiddleware,personRoutes);
+app.use('/menu',jwtAuthMiddleware,menuRoutes);
 
  app.listen(PORT,()=>{
    console.log('listening on p -3000')

@@ -2,6 +2,11 @@ const jwt = require('jsonwebtoken');
 
 //creating middleware function
 const jwtAuthMiddleware = (req,res,next)=>{
+//checking if headers has autorixation
+const authorization = req.headers.authorization;
+if(!authorization){
+    return res.status(401).json("Error token not present ")
+}
 
     // jwt token extraction from request headers
     const token = req.headers.authorization.split(' ')[1];
