@@ -6,6 +6,10 @@
 require('dotenv').config()
 const PORT = process.env.PORT || 3000
  const bodyParser = require('body-parser')
+ 
+ const passport = require('./auth'); 
+
+require('./auth')
 app.use(bodyParser.json())
 
 //middleware func
@@ -17,14 +21,14 @@ app.use(logger);
 
 
 
- app.get('/',logger,(req,res)=>{
+//  // initializing passport
+ app.use(passport.initialize());
+const localAuth = passport.authenticate('local',{session:false})
+
+ app.get('/',logger,localAuth,(req,res)=>{
     res.send("hello")
  })
-
- 
-
-
-app.use('/persons',personRoutes);
+app.use('/persons',localAuth,personRoutes);
 app.use('/menu',menuRoutes);
 
  app.listen(PORT,()=>{
